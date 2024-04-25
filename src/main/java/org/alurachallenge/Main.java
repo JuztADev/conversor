@@ -56,6 +56,12 @@ public class Main {
                         }
                         System.out.print("Ingrese el monto que desea intercambiar de " + inputFCode + " a " + inputSCode + " :");
                         String inputAmount = inputsUser.nextLine();
+                        try {
+                            double parseToConfirm = Double.parseDouble(inputAmount);
+                        }catch (Exception e){
+                            System.out.println("Parece que hubo un error con el monto ingresado por favor intentelo de nuevo");
+                            continue;
+                        }
                         Gson gson = new GsonBuilder().registerTypeAdapter(Converter.class,new ConverterGsonDeserializer()).create();
                         Converter outputConverter = gson.fromJson(converterClient.convertCurrency(inputFCode,inputSCode,inputAmount), Converter.class);
                         System.out.println(outputConverter.toString());
